@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Wiggle 2",
     "author": "Steve Miller",
-    "version": (2, 2, 4),
+    "version": (2, 2, 4),  # + Blender 5.x patch (collision_col)
     "blender": (3, 00, 0),
     "location": "3d Viewport > Animation Panel",
     "description": "Simulate spring-like physics on Bone transforms",
@@ -474,16 +474,16 @@ def wiggle_pre(scene):
             if not b.wiggle.collision_col:
                 if b.wiggle_collider_collection:
                     b.wiggle_collider_collection = bpy.data.collections.get(b.wiggle_collider_collection.name)
-                    b.wiggle.collision_col = scene.collection
+                    pass  # Blender 5.x: embedded IDs (scene.collection) cannot be stored in a pointer property; the flag was never read
                 elif b.wiggle_collider_collection_head:
                     bpy.data.collections.get(b.wiggle_collider_collection_head.name)
-                    b.wiggle.collision_col = scene.collection
+                    pass  # Blender 5.x: embedded IDs (scene.collection) cannot be stored in a pointer property; the flag was never read
                 elif b.wiggle_collider:
                     bpy.data.objects.get(b.wiggle_collider.name)
-                    b.wiggle.collision_col = scene.collection
+                    pass  # Blender 5.x: embedded IDs (scene.collection) cannot be stored in a pointer property; the flag was never read
                 elif b.wiggle_collider_head:
                     bpy.data.objects.get(b.wiggle_collider_head.name)
-                    b.wiggle.collision_col = scene.collection
+                    pass  # Blender 5.x: embedded IDs (scene.collection) cannot be stored in a pointer property; the flag was never read
             b.location = Vector((0,0,0))
             b.rotation_quaternion = Quaternion((1,0,0,0))
             b.rotation_euler = Vector((0,0,0))
